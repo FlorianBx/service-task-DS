@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { DataService, Task } from '../../services/data-service';
 
 @Component({
   selector: 'app-child-two',
-  imports: [],
+  imports: [RouterOutlet],
   templateUrl: './child-two.html',
   styleUrl: './child-two.css'
 })

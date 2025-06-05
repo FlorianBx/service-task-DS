@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { ChildOne } from './components/child-one/child-one';
-import { ChildTwo } from './components/child-two/child-two';
-import { ChildThree } from './components/child-three/child-three';
+import { RouterOutlet } from '@angular/router';
+import { Navbar } from './components/navbar/navbar';
+import { Layout } from './components/layout/layout';
 
 @Component({
   selector: 'app-root',
-  imports: [ChildOne, ChildTwo, ChildThree],
+  imports: [Navbar, RouterOutlet, Layout],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
