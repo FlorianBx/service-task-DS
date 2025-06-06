@@ -1,1 +1,8 @@
 <p>child-two works!</p>
+@if (myObservable$ | async; as cats) {
+  @for (cat of cats; track cat.id) {
+    <img class="max-w-lg" [src]="cat.url" [alt]="'Cat image ' + cat.id" />
+  }
+} @else {
+  <p>Chargement des images...</p>
+}

@@ -1,24 +1,28 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { DataService, Task } from '../../services/data-service';
+import { DataService, Task, CatImage } from '../../services/data-service';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-child-two',
-  imports: [RouterOutlet],
+  imports: [AsyncPipe],
   templateUrl: './child-two.html',
   styleUrl: './child-two.css'
 })
 export class ChildTwo {
   dataService = inject(DataService);
   todos: Task[] = this.dataService.taskList;
+  myObservable$!: Observable<CatImage[]>;
+  error: string | null = null;
 
   ngOnInit() {
-    this.todos.push(
-      {id: this.todos.length + 1, task: 'task4 🚀'}
-    );
-    this.todos.push(
-      {id: this.todos.length + 1, task: 'super test🚀'}
+    this.myObservable$ = this.dataService.getCat().pipe(
+      catchError(error => {
+        console.error('Error fetching cat images:', error);
+        this.error = 'Unable to load cat images';
+        return of([]);
+      })
     );
   }
-
 }

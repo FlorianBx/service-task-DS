@@ -1,0 +1,29 @@
+<form class="flex flex-col gap-2 mt-4" [formGroup]="applyForm" (submit)="submitForm()">
+  <label for="email">Email</label>
+  <input  class="text-black bg-white" id="email" type="text" formControlName="email">
+
+  <label for="password">Password</label>
+  <input class="text-black bg-white" placeholder="votre password ici..." id="password" type="password" formControlName="password">
+  @if (password.invalid && (password.dirty || password.touched)) {
+    @if (password.hasError('required')) {
+      <div class="text-red-400">
+        Name is required.
+      </div>
+    }
+    @if (password.hasError('minlength')) {
+      <small class="text-red-400">Password should have at least 6 characters...</small>
+    }
+  }
+
+  <label for="confirmPassword">Password <span class="text-('4px') text-red-400">(*)required</span></label>
+  <input class="text-black bg-white" id="confirmPassword" type="password" formControlName="confirmPassword">
+
+
+  <button
+    class="bg-red-400 py-2 px-4 rounded disabled:bg-gray-500 hover:bg-red-700 cursor-pointer"
+    [disabled]="applyForm.invalid"
+    type="submit"
+  >
+    Login
+  </button>
+</form>
